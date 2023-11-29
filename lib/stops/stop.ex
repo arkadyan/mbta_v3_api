@@ -2,8 +2,8 @@ defmodule Stops.Stop do
   @moduledoc """
   Domain model for a Stop.
   """
-  # alias Stops.{Api, Stop}
-  alias Stops.Stop
+
+  # alias Stops.Api
 
   @derive {Jason.Encoder, except: [:bike_storage, :fare_facilities]}
 
@@ -35,7 +35,7 @@ defmodule Stops.Stop do
 
   @type stop_type :: :stop | :station | :entrance | :generic_node
 
-  @type t :: %Stop{
+  @type t :: %__MODULE__{
           id: id_t,
           parent_id: id_t | nil,
           child_ids: [id_t],
@@ -44,7 +44,7 @@ defmodule Stops.Stop do
           accessibility: [String.t()],
           address: String.t() | nil,
           municipality: String.t() | nil,
-          parking_lots: [Stop.ParkingLot.t()],
+          parking_lots: [Stops.Stop.ParkingLot.t()],
           # TODO: Restore fare_facilities once we've copied in Stops.Api
           # fare_facilities: MapSet.t(Api.fare_facility()),
           bike_storage: [Api.bike_storage_types()],
